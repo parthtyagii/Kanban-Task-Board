@@ -2,6 +2,10 @@
     width: 100%;
     height: calc(100vh - 188px);
     padding: 20px;
-    background-color: pink;
+    border: 1px solid black;
+
     display: flex;
+    justify-content: space-between;
+    align-items: start;
+    column-gap: 20px;
 }
