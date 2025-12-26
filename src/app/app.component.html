@@ -1,5 +1,5 @@
 <div class="app-wrapper">
   <app-header></app-header>
-  <app-add-new-task></app-add-new-task>
-  <app-all-tasks></app-all-tasks>
+  <app-add-new-task (addTaskEvent)="handleAddNewTask($event)"></app-add-new-task>
+  <app-all-tasks [latestTask]="latestTask"></app-all-tasks>
 </div>

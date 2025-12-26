@@ -10,5 +10,10 @@ import { AllTasksComponent } from './components/all-tasks/all-tasks.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'Kanban-Task-Board';
+  latestTask: { data: string; counter: number } = { data: '', counter: 0 };
+
+  handleAddNewTask(task: { data: string; counter: number }) {
+    console.log('New task received in AppComponent:', task);
+    this.latestTask = task;
+  }
 }
