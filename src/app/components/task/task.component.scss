@@ -1,0 +1,41 @@
+:host {
+  flex: 1;
+  display: flex;
+  align-self: stretch;
+}
+
+.task {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid green;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.task-content {
+  width: 100%;
+  textarea {
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    padding: 5px;
+  }
+}
+
+.movement-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: 10px;
+
+  button {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+}
