@@ -4,7 +4,7 @@
     </div>
 
     <div class="add-new-task-form">
-        <textarea name="newTask" id="newTask"></textarea>
-        <button type="button">Add</button>
+        <textarea #newTask name="newTask" id="newTask"></textarea>
+        <button (click)="addNewTask(newTask)" type="button">Add</button>
     </div>
 </div>
