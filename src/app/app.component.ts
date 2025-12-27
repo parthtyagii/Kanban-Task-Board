@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
 import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
 import { AllTasksComponent } from './components/all-tasks/all-tasks.component';
+import { TASKDATA } from './global.constants';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,9 @@ import { AllTasksComponent } from './components/all-tasks/all-tasks.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  latestTask: { data: string; counter: number } = { data: '', counter: 0 };
+  latestTask: TASKDATA = { data: '', counter: 0, title: '' };
 
-  handleAddNewTask(task: { data: string; counter: number }) {
+  handleAddNewTask(task: TASKDATA): void {
     console.log('New task received in AppComponent:', task);
     this.latestTask = task;
   }

@@ -1,9 +1,42 @@
 <div class="task">
   <div class="task-content">
-    <textarea name="my-task">{{ task.data }}</textarea>
+    <textarea #taskTextarea [disabled]="disabledTextarea" name="my-task">{{
+      task.data
+    }}</textarea>
   </div>
-  <div class="movement-buttons">
-    <button>&lt;</button>
-    <button>&gt;</button>
+
+  <div class="control-buttons">
+    <div class="manipulation-buttons">
+      <button id="delete">
+        <mat-icon class="manipulation-icons" (click)="handleTaskDeletion()">delete</mat-icon>
+      </button>
+
+      <button
+        *ngIf="!disabledTextarea"
+        id="edit"
+        [disabled]="disableEditButton"
+        (click)="enableDisableEditing(taskTextarea)"
+      >
+        <mat-icon class="manipulation-icons">check</mat-icon>
+      </button>
+
+      <button
+        *ngIf="disabledTextarea"
+        id="edit"
+        [disabled]="disableEditButton"
+        (click)="enableDisableEditing(taskTextarea)"
+      >
+        <mat-icon class="manipulation-icons">edit_square</mat-icon>
+      </button>
+    </div>
+
+    <div class="movement-buttons">
+      <button id="backward" (click)="handleMoveBackward()">
+        <mat-icon class="movement-icons">arrow_left</mat-icon>
+      </button>
+      <button id="forward" (click)="handleMoveForward()">
+        <mat-icon class="movement-icons">arrow_right</mat-icon>
+      </button>
+    </div>
   </div>
 </div>
