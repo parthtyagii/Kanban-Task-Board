@@ -12,11 +12,10 @@ export class AddNewTaskComponent {
   counter: number = 0;
 
   addNewTask(newTask: HTMLTextAreaElement) {
-    console.log('Add task clicked!');
     const data = newTask.value.trim();
     if (data.length === 0) return;
     this.counter += 1;
-    this.addTaskEvent.emit({ data, counter: this.counter , title: 'todo'});
+    this.addTaskEvent.emit({ data, counter: this.counter, title: 'todo' });
     newTask.value = '';
   }
 }

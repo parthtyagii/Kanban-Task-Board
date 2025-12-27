@@ -36,12 +36,10 @@ export class TaskComponent implements OnInit {
   }
 
   handleMoveBackward(): void {
-    console.log('Move Backward clicked for task:', this.task);
     this.taskMovementEvent.emit({ move: 'backward', task: this.task });
   }
 
   handleMoveForward(): void {
-    console.log('Move Forward clicked for task:', this.task);
     this.taskMovementEvent.emit({ move: 'forward', task: this.task });
   }
 

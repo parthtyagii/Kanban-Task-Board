@@ -14,7 +14,6 @@ export class AppComponent {
   latestTask: TASKDATA = { data: '', counter: 0, title: '' };
 
   handleAddNewTask(task: TASKDATA): void {
-    console.log('New task received in AppComponent:', task);
     this.latestTask = task;
   }
 }
