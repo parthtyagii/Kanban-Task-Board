@@ -1,5 +1,21 @@
 <div class="all-tasks">
-    <app-status-column [title]="'ToDo'" [latestTask]="latestTask"></app-status-column>
-    <app-status-column [title]="'In Progress'"></app-status-column>
-    <app-status-column [title]="'Done'"></app-status-column>
+  <app-status-column
+    [title]="'ToDo'"
+    [allTasks]="todoTasks"
+    (taskMovementEvent)="handleTaskMovement($event)"
+    (taskDeletionEvent)="handleTaskDeletion($event)"
+    (taskEditEvent)="handleTaskEdit($event)"
+  ></app-status-column>
+  <app-status-column
+    [title]="'In Progress'"
+    [allTasks]="inProgressTasks"
+    (taskMovementEvent)="handleTaskMovement($event)"
+    (taskDeletionEvent)="handleTaskDeletion($event)"
+  ></app-status-column>
+  <app-status-column
+    [title]="'Done'"
+    [allTasks]="doneTasks"
+    (taskMovementEvent)="handleTaskMovement($event)"
+    (taskDeletionEvent)="handleTaskDeletion($event)"
+  ></app-status-column>
 </div>

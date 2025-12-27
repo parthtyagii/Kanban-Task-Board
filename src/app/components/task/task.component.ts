@@ -1,11 +1,49 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TASKDATA } from '../../global.constants';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
-  imports: [],
+  imports: [MatIconModule, CommonModule],
 })
-export class TaskComponent {
-  @Input({ required: true }) task: { data: string; counter: number } = { data: '', counter: 0 };
+export class TaskComponent implements OnInit {
+  disabledTextarea: boolean = true;
+  disableEditButton: boolean = false;
+  @Output() taskMovementEvent = new EventEmitter();
+  @Output() taskDeletionEvent = new EventEmitter();
+  @Output() taskEditEvent = new EventEmitter();
+  @Input({ required: true }) task: TASKDATA = {
+    data: '',
+    counter: 0,
+    title: '',
+  };
+
+  ngOnInit(): void {
+    if (this.task.title !== 'todo') {
+      this.disableEditButton = true;
+    }
+  }
+
+  enableDisableEditing(taskTextarea: HTMLTextAreaElement): void {
+    if (this.disableEditButton) return;
+    this.disabledTextarea = !this.disabledTextarea;
+    if (this.disabledTextarea) {
+      this.taskEditEvent.emit({ task: this.task, newData: taskTextarea.value });
+    }
+  }
+
+  handleMoveBackward(): void {
+    this.taskMovementEvent.emit({ move: 'backward', task: this.task });
+  }
+
+  handleMoveForward(): void {
+    this.taskMovementEvent.emit({ move: 'forward', task: this.task });
+  }
+
+  handleTaskDeletion(): void {
+    this.taskDeletionEvent.emit(this.task);
+  }
 }

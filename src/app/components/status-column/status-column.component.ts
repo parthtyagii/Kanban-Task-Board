@@ -1,12 +1,15 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
 } from '@angular/core';
 import { TaskComponent } from '../task/task.component';
 import { CommonModule } from '@angular/common';
+import { TASKDATA } from '../../global.constants';
 
 @Component({
   selector: 'app-status-column',
@@ -14,23 +17,26 @@ import { CommonModule } from '@angular/common';
   templateUrl: './status-column.component.html',
   styleUrl: './status-column.component.scss',
 })
-export class StatusColumnComponent implements OnChanges, OnInit {
+export class StatusColumnComponent implements OnInit {
   @Input({ required: true }) title: string = 'title';
-  @Input() latestTask: { data: string; counter: number } = { data: '', counter: 0 };
-  allTasks: { data: string; counter: number }[] = [];
+  @Input() allTasks: TASKDATA[] = [];
+  @Output() taskMovementEvent = new EventEmitter();
+  @Output() taskDeletionEvent = new EventEmitter();
+  @Output() taskEditEvent = new EventEmitter();
 
   ngOnInit(): void {
     // Initialization logic can go here if needed
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('Changes detected in StatusColumnComponent:', changes);
-    if (changes['latestTask']) this.handleAddNewTask();
+  handleTaskMovement(event: { move: string; task: TASKDATA }): void {
+    this.taskMovementEvent.emit(event);
   }
 
-  handleAddNewTask(): void {
-    console.log('Handling new task in', this.title, this.latestTask);
-    if (this.latestTask.data.trim().length === 0) return;
-    this.allTasks.push(this.latestTask);
+  handleTaskDeletion(taskToDelete: TASKDATA): void {
+    this.taskDeletionEvent.emit(taskToDelete);
+  }
+
+  handleTaskEdit(event: { task: TASKDATA; newData: string }): void {
+    this.taskEditEvent.emit(event);
   }
 }

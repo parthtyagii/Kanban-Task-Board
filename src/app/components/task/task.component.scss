@@ -26,8 +26,15 @@
   }
 }
 
-.movement-buttons {
+.control-buttons {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.movement-buttons,
+.manipulation-buttons {
   display: flex;
   justify-content: end;
   align-items: center;
@@ -37,5 +44,24 @@
     width: 25px;
     height: 25px;
     cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    mat-icon {
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .manipulation-icons {
+      font-size: 15px;
+    }
+
+    .movement-icons {
+      font-size: 20px;
+    }
   }
 }
