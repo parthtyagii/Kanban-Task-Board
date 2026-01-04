@@ -1,7 +1,16 @@
 <div class="status-column">
   <div class="status-column-heading">
-    <h3>{{ title }}</h3>
+    <div class="title">{{ title }}</div>
+    <div class="count">23</div>
   </div>
+
+  <div class="add-new-tasks">
+    <input type="text" placeholder="Quick Add Task - Title Only" />
+    <button>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
   <div class="all-tasks">
     <app-task
       *ngFor="let task of allTasks"

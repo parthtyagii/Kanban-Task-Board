@@ -1,11 +1,15 @@
-.all-tasks {
-    width: 100%;
-    height: calc(100vh - 188px);
-    padding: 20px;
-    border: 1px solid black;
+:host {
+  flex: 1;
+}
 
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    column-gap: 20px;
+.all-tasks {
+  width: 100%;
+  height: calc(100vh - 188px);
+  padding: 20px 10px;
+  border: 1px solid black;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  column-gap: 20px;
 }

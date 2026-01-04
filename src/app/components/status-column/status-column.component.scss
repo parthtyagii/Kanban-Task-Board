@@ -8,18 +8,72 @@
   height: 100%;
   border: 1px solid red;
   overflow-y: auto;
+  padding: 5px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  row-gap: 10px;
 }
 
 .status-column-heading {
   width: 100%;
+  border: 1px solid blue;
+  display: flex;
+  justify-content: start;
+  column-gap: 5px;
+
+  div {
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .count {
+    font-size: 12px;
+    align-items: end;
+  }
+}
+
+.add-new-tasks {
+  width: 100%;
+  height: 30px;
+  // border: 1px solid green;
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 5px;
+
+  input {
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    flex: 1;
+  }
+
+  button {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  mat-icon {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
 }
 
 .all-tasks {
@@ -28,4 +82,5 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  row-gap: 10px;
 }

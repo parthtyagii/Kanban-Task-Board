@@ -10,10 +10,11 @@ import {
 import { TaskComponent } from '../task/task.component';
 import { CommonModule } from '@angular/common';
 import { TASKDATA } from '../../global.constants';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-status-column',
-  imports: [TaskComponent, CommonModule],
+  imports: [TaskComponent, CommonModule, MatIconModule],
   templateUrl: './status-column.component.html',
   styleUrl: './status-column.component.scss',
 })
