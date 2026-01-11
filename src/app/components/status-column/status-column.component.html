@@ -4,11 +4,8 @@
     <div class="count">23</div>
   </div>
 
-  <div class="add-new-tasks">
-    <input type="text" placeholder="Quick Add Task - Title Only" />
-    <button>
-      <mat-icon>add</mat-icon>
-    </button>
+  <div *ngIf="allowAddTask" class="add-new-tasks">
+    <app-add-new-task></app-add-new-task>
   </div>
 
   <div class="all-tasks">

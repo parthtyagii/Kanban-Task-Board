@@ -1,10 +1,6 @@
 <div class="add-new-task">
-    <div class="add-new-task-heading">
-        <h2>Add New Task</h2>
-    </div>
-
-    <div class="add-new-task-form">
-        <textarea #newTask name="newTask" id="newTask"></textarea>
-        <button (click)="addNewTask(newTask)" type="button">Add</button>
-    </div>
+    <input type="text" placeholder="Quick Add Task - Title Only" #newTaskInput />
+    <button (click)="addNewTask(newTaskInput)">
+      <mat-icon>add</mat-icon>
+    </button>
 </div>

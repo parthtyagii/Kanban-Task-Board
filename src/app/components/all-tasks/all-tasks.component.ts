@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { StatusColumnComponent } from '../status-column/status-column.component';
-import { TASKDATA } from '../../global.constants';
+import { ColumnTitles, TASKDATA } from '../../models/global.constants';
 
 @Component({
   selector: 'app-all-tasks',
@@ -15,10 +15,11 @@ import { TASKDATA } from '../../global.constants';
   styleUrl: './all-tasks.component.scss',
 })
 export class AllTasksComponent implements OnChanges, OnInit {
-  @Input() latestTask: TASKDATA = { data: '', counter: 0, title: '' };
+  @Input() latestTask: TASKDATA = { id: '', title: '', description: '', status: 'TODO' };
   todoTasks: TASKDATA[] = [];
   inProgressTasks: TASKDATA[] = [];
   doneTasks: TASKDATA[] = [];
+  columnTitles = ColumnTitles;
 
   ngOnInit(): void {
     const todo = localStorage.getItem('todoTasks');
@@ -35,9 +36,9 @@ export class AllTasksComponent implements OnChanges, OnInit {
   }
 
   handleAddNewTask(): void {
-    if (this.latestTask.data.trim().length === 0) return;
-    this.todoTasks = [this.latestTask, ...this.todoTasks];
-    localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
+    // if (this.latestTask.data.trim().length === 0) return;
+    // this.todoTasks = [this.latestTask, ...this.todoTasks];
+    // localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
   }
 
   handleTaskMovement(event: { move: string; task: TASKDATA }): void {
@@ -49,79 +50,79 @@ export class AllTasksComponent implements OnChanges, OnInit {
   }
 
   private moveTaskForward(task: TASKDATA): void {
-    if (task.title === 'todo') {
-      this.todoTasks = this.todoTasks.filter((t) => t.data !== task.data);
-      task.title = 'in-progress';
-      this.inProgressTasks = [task, ...this.inProgressTasks];
-      localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
-      localStorage.setItem(
-        'inProgressTasks',
-        JSON.stringify(this.inProgressTasks)
-      );
-    } else if (task.title === 'in-progress') {
-      this.inProgressTasks = this.inProgressTasks.filter(
-        (t) => t.data !== task.data
-      );
-      task.title = 'done';
-      this.doneTasks = [task, ...this.doneTasks];
-      localStorage.setItem(
-        'inProgressTasks',
-        JSON.stringify(this.inProgressTasks)
-      );
-      localStorage.setItem('doneTasks', JSON.stringify(this.doneTasks));
-    }
+    // if (task.title === 'todo') {
+    //   this.todoTasks = this.todoTasks.filter((t) => t.data !== task.data);
+    //   task.title = 'in-progress';
+    //   this.inProgressTasks = [task, ...this.inProgressTasks];
+    //   localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
+    //   localStorage.setItem(
+    //     'inProgressTasks',
+    //     JSON.stringify(this.inProgressTasks)
+    //   );
+    // } else if (task.title === 'in-progress') {
+    //   this.inProgressTasks = this.inProgressTasks.filter(
+    //     (t) => t.data !== task.data
+    //   );
+    //   task.title = 'done';
+    //   this.doneTasks = [task, ...this.doneTasks];
+    //   localStorage.setItem(
+    //     'inProgressTasks',
+    //     JSON.stringify(this.inProgressTasks)
+    //   );
+    //   localStorage.setItem('doneTasks', JSON.stringify(this.doneTasks));
+    // }
   }
 
   private moveTaskBackward(task: TASKDATA): void {
-    if (task.title === 'in-progress') {
-      this.inProgressTasks = this.inProgressTasks.filter(
-        (t) => t.data !== task.data
-      );
-      task.title = 'todo';
-      this.todoTasks = [task, ...this.todoTasks];
-      localStorage.setItem(
-        'inProgressTasks',
-        JSON.stringify(this.inProgressTasks)
-      );
-      localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
-    } else if (task.title === 'done') {
-      this.doneTasks = this.doneTasks.filter((t) => t.data !== task.data);
-      task.title = 'in-progress';
-      this.inProgressTasks = [task, ...this.inProgressTasks];
-      localStorage.setItem('doneTasks', JSON.stringify(this.doneTasks));
-      localStorage.setItem(
-        'inProgressTasks',
-        JSON.stringify(this.inProgressTasks)
-      );
-    }
+    // if (task.title === 'in-progress') {
+    //   this.inProgressTasks = this.inProgressTasks.filter(
+    //     (t) => t.data !== task.data
+    //   );
+    //   task.title = 'todo';
+    //   this.todoTasks = [task, ...this.todoTasks];
+    //   localStorage.setItem(
+    //     'inProgressTasks',
+    //     JSON.stringify(this.inProgressTasks)
+    //   );
+    //   localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
+    // } else if (task.title === 'done') {
+    //   this.doneTasks = this.doneTasks.filter((t) => t.data !== task.data);
+    //   task.title = 'in-progress';
+    //   this.inProgressTasks = [task, ...this.inProgressTasks];
+    //   localStorage.setItem('doneTasks', JSON.stringify(this.doneTasks));
+    //   localStorage.setItem(
+    //     'inProgressTasks',
+    //     JSON.stringify(this.inProgressTasks)
+    //   );
+    // }
   }
 
   handleTaskDeletion(taskToDelete: TASKDATA): void {
-    if (taskToDelete.title === 'todo') {
-      this.todoTasks = this.todoTasks.filter(
-        (t) => t.data !== taskToDelete.data
-      );
-      localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
-    } else if (taskToDelete.title === 'in-progress') {
-      this.inProgressTasks = this.inProgressTasks.filter(
-        (t) => t.data !== taskToDelete.data
-      );
-      localStorage.setItem(
-        'inProgressTasks',
-        JSON.stringify(this.inProgressTasks)
-      );
-    } else if (taskToDelete.title === 'done') {
-      this.doneTasks = this.doneTasks.filter(
-        (t) => t.data !== taskToDelete.data
-      );
-      localStorage.setItem('doneTasks', JSON.stringify(this.doneTasks));
-    }
+    // if (taskToDelete.title === 'todo') {
+    //   this.todoTasks = this.todoTasks.filter(
+    //     (t) => t.data !== taskToDelete.data
+    //   );
+    //   localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
+    // } else if (taskToDelete.title === 'in-progress') {
+    //   this.inProgressTasks = this.inProgressTasks.filter(
+    //     (t) => t.data !== taskToDelete.data
+    //   );
+    //   localStorage.setItem(
+    //     'inProgressTasks',
+    //     JSON.stringify(this.inProgressTasks)
+    //   );
+    // } else if (taskToDelete.title === 'done') {
+    //   this.doneTasks = this.doneTasks.filter(
+    //     (t) => t.data !== taskToDelete.data
+    //   );
+    //   localStorage.setItem('doneTasks', JSON.stringify(this.doneTasks));
+    // }
   }
 
   handleTaskEdit(event: { task: TASKDATA; newData: string }): void {
-    this.todoTasks = this.todoTasks.map((t) =>
-      t.data === event.task.data ? { ...t, data: event.newData } : t
-    );
-    localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
+    // this.todoTasks = this.todoTasks.map((t) =>
+    //   t.data === event.task.data ? { ...t, data: event.newData } : t
+    // );
+    // localStorage.setItem('todoTasks', JSON.stringify(this.todoTasks));
   }
 }
