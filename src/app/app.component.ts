@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
-import { AddNewTaskComponent } from './components/add-new-task/add-new-task.component';
 import { AllTasksComponent } from './components/all-tasks/all-tasks.component';
-import { TASKDATA } from './global.constants';
+import { TASKDATA } from './models/global.constants';
 
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent, AddNewTaskComponent, AllTasksComponent],
+  imports: [HeaderComponent, AllTasksComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  latestTask: TASKDATA = { data: '', counter: 0, title: '' };
+  latestTask: TASKDATA = { id: '', description: '', title: '', status: 'TODO' };
 
   handleAddNewTask(task: TASKDATA): void {
     this.latestTask = task;

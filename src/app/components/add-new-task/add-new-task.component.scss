@@ -1,38 +1,43 @@
+  // width: 100%;
+  // height: 30px;
+  // // border: 1px solid green;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // column-gap: 5px;
+
+
 .add-new-task {
   width: 100%;
-  height: auto;
-  padding: 20px;
-
+  height: 30px;
+  // border: 1px solid green;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: start;
-  row-gap: 10px;
-}
+  align-items: center;
+  column-gap: 5px;
 
-.add-new-task-heading {
-  width: 100%;
-}
+  input {
+    height: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 14px;
+    flex: 1;
+  }
 
-.add-new-task-form{
-    width: 100%;
-    height: 60px;
+  button {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+
     display: flex;
-    justify-content: start;
-    align-items: start;
-    column-gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
 
-    textarea {
-        min-width: 50%;
-        max-width: 50%;
-        min-height: 100%;
-        max-height: 100%;
-        padding: 5px;
-    }
-
-    button {
-        width: 100px;
-        height: 100%;
-        cursor: pointer;
-    }
+  mat-icon {
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

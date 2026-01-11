@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TASKDATA } from '../../global.constants';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { TASKDATA } from '../../models/global.constants';
 
 @Component({
   selector: 'app-task',
@@ -16,9 +16,10 @@ export class TaskComponent implements OnInit {
   @Output() taskDeletionEvent = new EventEmitter();
   @Output() taskEditEvent = new EventEmitter();
   @Input({ required: true }) task: TASKDATA = {
-    data: '',
-    counter: 0,
+    id: '',
+    description: '',
     title: '',
+    status: 'TODO',
   };
 
   ngOnInit(): void {
