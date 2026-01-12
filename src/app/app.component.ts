@@ -9,10 +9,4 @@ import { TASKDATA } from './models/global.constants';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  latestTask: TASKDATA = { id: '', description: '', title: '', status: 'TODO' };
-
-  handleAddNewTask(task: TASKDATA): void {
-    this.latestTask = task;
-  }
-}
+export class AppComponent {}

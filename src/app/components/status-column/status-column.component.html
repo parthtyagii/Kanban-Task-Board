@@ -12,9 +12,6 @@
     <app-task
       *ngFor="let task of allTasks"
       [task]="task"
-      (taskMovementEvent)="handleTaskMovement($event)"
-      (taskDeletionEvent)="handleTaskDeletion($event)"
-      (taskEditEvent)="handleTaskEdit($event)"
     ></app-task>
   </div>
 </div>

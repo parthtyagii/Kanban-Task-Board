@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AddNewTaskComponent } from '../add-new-task/add-new-task.component';
 import { ColumnTitles, TASKDATA } from '../../models/global.constants';
+import { ManageTaskService } from '../../services/manage-task.service';
 
 @Component({
   selector: 'app-status-column',
@@ -20,30 +21,28 @@ import { ColumnTitles, TASKDATA } from '../../models/global.constants';
   styleUrl: './status-column.component.scss',
 })
 export class StatusColumnComponent implements OnInit {
-  @Input({ required: true }) title: string = 'default-title';
-  @Input() allTasks: TASKDATA[] = [];
-  @Output() taskMovementEvent = new EventEmitter();
-  @Output() taskDeletionEvent = new EventEmitter();
-  @Output() taskEditEvent = new EventEmitter();
+  @Input({ required: true }) title!: string;
+  allTasks: TASKDATA[] = [];
   allowAddTask: boolean = false;
   colunnTitles = ColumnTitles;
 
+  constructor(private manageTaskService: ManageTaskService) {}
+
   ngOnInit(): void {
     // Initialization logic can go here if needed
-    if(this.title == this.colunnTitles.TODO) {
+    if (this.title == this.colunnTitles.TODO) {
       this.allowAddTask = true;
     }
+    
+    this.manageTaskService.tasksInfo$.subscribe(() => {
+      this.loadTasks();
+    });
   }
 
-  handleTaskMovement(event: { move: string; task: TASKDATA }): void {
-    this.taskMovementEvent.emit(event);
-  }
-
-  handleTaskDeletion(taskToDelete: TASKDATA): void {
-    this.taskDeletionEvent.emit(taskToDelete);
-  }
-
-  handleTaskEdit(event: { task: TASKDATA; newData: string }): void {
-    this.taskEditEvent.emit(event);
+  loadTasks(): void {
+    // get all tasks from service for this column
+    this.allTasks = this.manageTaskService.getTasksByStatus(this.title);
+    console.log('Tasks loaded for', this.title);
+    console.log(this.allTasks);
   }
 }
