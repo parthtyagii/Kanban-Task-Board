@@ -1,7 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { TASKDATA } from '../../models/global.constants';
+import { TASK_STATUS, TASKDATA } from '../../models/global.constants';
+import { ManageTaskService } from '../../services/manage-task.service';
 
 @Component({
   selector: 'app-task',
@@ -9,42 +19,33 @@ import { TASKDATA } from '../../models/global.constants';
   styleUrl: './task.component.scss',
   imports: [MatIconModule, CommonModule],
 })
-export class TaskComponent implements OnInit {
-  disabledTextarea: boolean = true;
+export class TaskComponent implements OnInit, AfterViewInit {
+  @ViewChild('taskTextarea') taskTextarea!: ElementRef<HTMLTextAreaElement>;
+  @ViewChild('taskInput') taskInput!: ElementRef<HTMLInputElement>;
+  @Input({ required: true }) task!: TASKDATA;
+  disabledFields: boolean = true;
   disableEditButton: boolean = false;
-  @Output() taskMovementEvent = new EventEmitter();
-  @Output() taskDeletionEvent = new EventEmitter();
-  @Output() taskEditEvent = new EventEmitter();
-  @Input({ required: true }) task: TASKDATA = {
-    id: '',
-    description: '',
-    title: '',
-    status: 'TODO',
-  };
+  taskStatus = TASK_STATUS;
+
+  constructor(private manageTaskService: ManageTaskService) {}
 
   ngOnInit(): void {
-    if (this.task.title !== 'todo') {
+    if (this.task.status !== this.taskStatus.TODO) {
       this.disableEditButton = true;
     }
   }
 
+  ngAfterViewInit(): void {
+    this.taskInput.nativeElement.value = this.task.title;
+    this.taskTextarea.nativeElement.value = this.task.description;
+  }
+
   enableDisableEditing(taskTextarea: HTMLTextAreaElement): void {
     if (this.disableEditButton) return;
-    this.disabledTextarea = !this.disabledTextarea;
-    if (this.disabledTextarea) {
-      this.taskEditEvent.emit({ task: this.task, newData: taskTextarea.value });
-    }
+    this.disabledFields = !this.disabledFields;
   }
 
-  handleMoveBackward(): void {
-    this.taskMovementEvent.emit({ move: 'backward', task: this.task });
-  }
-
-  handleMoveForward(): void {
-    this.taskMovementEvent.emit({ move: 'forward', task: this.task });
-  }
-
-  handleTaskDeletion(): void {
-    this.taskDeletionEvent.emit(this.task);
+  handleDeleteTask(): void {
+    this.manageTaskService.deleteTask(this.task);
   }
 }

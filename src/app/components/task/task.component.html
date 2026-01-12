@@ -1,40 +1,46 @@
 <div class="task">
   <div class="task-content">
-    <textarea #taskTextarea [disabled]="disabledTextarea" name="my-task">{{
-      task.description
-    }}</textarea>
+    <div class="task-title">
+      <label for="title">Title</label>
+      <input [disabled]="disabledFields" type="text" id="title" #taskInput />
+    </div>
+    <div class="task-description">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        #taskTextarea
+        [disabled]="disabledFields"
+        name="my-task"
+        >{{ task.description }}</textarea
+      >
+    </div>
   </div>
 
   <div class="control-buttons">
     <div class="manipulation-buttons">
-      <button id="delete">
-        <mat-icon class="manipulation-icons" (click)="handleTaskDeletion()">delete</mat-icon>
+      <button id="delete" (click)="handleDeleteTask()">
+        <mat-icon class="manipulation-icons">delete</mat-icon>
       </button>
 
       <button
-        *ngIf="!disabledTextarea"
         id="edit"
         [disabled]="disableEditButton"
         (click)="enableDisableEditing(taskTextarea)"
       >
-        <mat-icon class="manipulation-icons">check</mat-icon>
-      </button>
-
-      <button
-        *ngIf="disabledTextarea"
-        id="edit"
-        [disabled]="disableEditButton"
-        (click)="enableDisableEditing(taskTextarea)"
-      >
-        <mat-icon class="manipulation-icons">edit_square</mat-icon>
+        <mat-icon *ngIf="!disabledFields" class="manipulation-icons"
+          >check</mat-icon
+        >
+        <mat-icon *ngIf="disabledFields" class="manipulation-icons"
+          >edit_square</mat-icon
+        >
       </button>
     </div>
 
     <div class="movement-buttons">
-      <button id="backward" (click)="handleMoveBackward()">
+      <button id="backward">
         <mat-icon class="movement-icons">arrow_left</mat-icon>
       </button>
-      <button id="forward" (click)="handleMoveForward()">
+      <button id="forward">
         <mat-icon class="movement-icons">arrow_right</mat-icon>
       </button>
     </div>

@@ -1,5 +1,5 @@
 export const ColumnTitles = {
-  TODO: 'TODO',
+  TODO: 'ToDo',
   IN_PROGRESS: 'In Progress',
   DONE: 'Done',
 };
