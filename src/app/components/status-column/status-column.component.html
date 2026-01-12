@@ -1,7 +1,7 @@
 <div class="status-column">
   <div class="status-column-heading">
     <div class="title">{{ title }}</div>
-    <div class="count">23</div>
+    <div class="count">{{ columnTaskCount }}</div>
   </div>
 
   <div *ngIf="allowAddTask" class="add-new-tasks">
@@ -9,9 +9,6 @@
   </div>
 
   <div class="all-tasks">
-    <app-task
-      *ngFor="let task of allTasks"
-      [task]="task"
-    ></app-task>
+    <app-task *ngFor="let task of allTasks" [task]="task"></app-task>
   </div>
 </div>
