@@ -25,6 +25,7 @@ export class StatusColumnComponent implements OnInit {
   allTasks: TASKDATA[] = [];
   allowAddTask: boolean = false;
   colunnTitles = ColumnTitles;
+  columnTaskCount: number = 0;
 
   constructor(private manageTaskService: ManageTaskService) {}
 
@@ -33,7 +34,7 @@ export class StatusColumnComponent implements OnInit {
     if (this.title == this.colunnTitles.TODO) {
       this.allowAddTask = true;
     }
-    
+
     this.manageTaskService.tasksInfo$.subscribe(() => {
       this.loadTasks();
     });
@@ -42,7 +43,6 @@ export class StatusColumnComponent implements OnInit {
   loadTasks(): void {
     // get all tasks from service for this column
     this.allTasks = this.manageTaskService.getTasksByStatus(this.title);
-    console.log('Tasks loaded for', this.title);
-    console.log(this.allTasks);
+    this.columnTaskCount = this.allTasks.length;
   }
 }

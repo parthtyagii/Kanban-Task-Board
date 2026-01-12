@@ -25,14 +25,12 @@ export class ManageTaskService {
   }
 
   loadTasksFromLocalStorage(): void {
-    console.log('Updating task categories');
     const allTasksData = localStorage.getItem('allTasks');
     this.allTasks = allTasksData ? JSON.parse(allTasksData) : [];
     this.updateTaskCategories(this.allTasks);
   }
 
   updateTaskCategories(allTasks: TASKDATA[]): void {
-    console.log(allTasks);
     this.todoTasks = this.allTasks.filter(
       (task) => task.status === this.TASKSTATUS.TODO
     );
@@ -46,20 +44,44 @@ export class ManageTaskService {
   }
 
   addNewTask(data: string): void {
-    console.log('Adding new task!');
     const newTask: TASKDATA = {
       id: crypto.randomUUID(),
       title: data,
       description: '',
       status: this.TASKSTATUS.TODO,
     };
-    this.allTasks.push(newTask);
+    this.allTasks = [newTask, ...this.allTasks];
     localStorage.setItem('allTasks', JSON.stringify(this.allTasks));
     this.updateTaskCategories(this.allTasks);
   }
 
   deleteTask(task: TASKDATA): void {
     this.allTasks = this.allTasks.filter((t) => t.id !== task.id);
+    localStorage.setItem('allTasks', JSON.stringify(this.allTasks));
+    this.updateTaskCategories(this.allTasks);
+  }
+
+  editTask(updatedTask: TASKDATA): void {
+    this.allTasks = this.allTasks.map((task) => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
+      }
+      return task;
+    });
+    localStorage.setItem('allTasks', JSON.stringify(this.allTasks));
+    this.updateTaskCategories(this.allTasks);
+  }
+
+  handleTaskMove(task: TASKDATA, newStatus: string): void {
+    const updatedTask: TASKDATA = {
+      ...task,
+      status: newStatus,
+    };
+
+    this.allTasks = this.allTasks.map((task) => {
+      if (task.id === updatedTask.id) return updatedTask;
+      else return task;
+    });
     localStorage.setItem('allTasks', JSON.stringify(this.allTasks));
     this.updateTaskCategories(this.allTasks);
   }

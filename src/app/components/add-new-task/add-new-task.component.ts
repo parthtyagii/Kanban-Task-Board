@@ -20,7 +20,6 @@ export class AddNewTaskComponent {
   constructor(private manageTaskService: ManageTaskService) {}
 
   addNewTask(newTask: HTMLInputElement): void {
-    console.log('Adding new task:', newTask.value);
     const data = newTask.value.trim();
     if (data.length === 0) return;
     // pass data to service to handle whatever the fuck.
