@@ -1,7 +1,7 @@
 <div class="task">
   <div class="task-content">
     <div class="task-title">
-      <label for="title">Title</label>
+      <a [routerLink]="['/task', task.status, task.id]" id="title">Title</a>
       <input [disabled]="disabledFields" type="text" id="title" #taskInput />
     </div>
     <div class="task-description">

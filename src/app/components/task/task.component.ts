@@ -16,12 +16,13 @@ import {
   TASKDATA,
 } from '../../models/global.constants';
 import { ManageTaskService } from '../../services/manage-task.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss',
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, RouterLink],
 })
 export class TaskComponent implements OnInit, AfterViewInit {
   @ViewChild('taskTextarea') taskTextarea!: ElementRef<HTMLTextAreaElement>;
@@ -67,7 +68,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
       if (this.task.status === this.taskStatus.TODO) {
         this.manageTaskService.handleTaskMove(
           this.task,
-          this.taskStatus.IN_PROGRESS
+          this.taskStatus.IN_PROGRESS,
         );
       } else if (this.task.status === this.taskStatus.IN_PROGRESS) {
         this.manageTaskService.handleTaskMove(this.task, this.taskStatus.DONE);
@@ -78,7 +79,7 @@ export class TaskComponent implements OnInit, AfterViewInit {
       } else if (this.task.status === this.taskStatus.DONE) {
         this.manageTaskService.handleTaskMove(
           this.task,
-          this.taskStatus.IN_PROGRESS
+          this.taskStatus.IN_PROGRESS,
         );
       }
     }

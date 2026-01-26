@@ -6,7 +6,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { StatusColumnComponent } from '../status-column/status-column.component';
-import { ColumnTitles, TASKDATA } from '../../models/global.constants';
+import { ColumnTitles, TASK_STATUS, TASKDATA } from '../../models/global.constants';
 
 @Component({
   selector: 'app-all-tasks',
@@ -16,6 +16,7 @@ import { ColumnTitles, TASKDATA } from '../../models/global.constants';
 })
 export class AllTasksComponent implements OnInit {
   columnTitles = ColumnTitles;
+  taskStatus = TASK_STATUS;
 
   ngOnInit(): void {}
 }

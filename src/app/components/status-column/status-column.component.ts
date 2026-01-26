@@ -11,7 +11,7 @@ import { TaskComponent } from '../task/task.component';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AddNewTaskComponent } from '../add-new-task/add-new-task.component';
-import { ColumnTitles, TASKDATA } from '../../models/global.constants';
+import { ColumnTitles, TASK_STATUS, TASKDATA } from '../../models/global.constants';
 import { ManageTaskService } from '../../services/manage-task.service';
 
 @Component({
@@ -22,16 +22,16 @@ import { ManageTaskService } from '../../services/manage-task.service';
 })
 export class StatusColumnComponent implements OnInit {
   @Input({ required: true }) title!: string;
+  @Input({ required: true }) columnStatus!: string;
   allTasks: TASKDATA[] = [];
   allowAddTask: boolean = false;
-  colunnTitles = ColumnTitles;
   columnTaskCount: number = 0;
 
   constructor(private manageTaskService: ManageTaskService) {}
 
   ngOnInit(): void {
     // Initialization logic can go here if needed
-    if (this.title == this.colunnTitles.TODO) {
+    if (this.columnStatus === TASK_STATUS.TODO) {
       this.allowAddTask = true;
     }
 
@@ -42,7 +42,7 @@ export class StatusColumnComponent implements OnInit {
 
   loadTasks(): void {
     // get all tasks from service for this column
-    this.allTasks = this.manageTaskService.getTasksByStatus(this.title);
+    this.allTasks = this.manageTaskService.getTasksByStatus(this.columnStatus);
     this.columnTaskCount = this.allTasks.length;
   }
 }

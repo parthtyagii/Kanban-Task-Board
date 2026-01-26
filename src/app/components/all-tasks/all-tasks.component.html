@@ -1,11 +1,14 @@
 <div class="all-tasks">
   <app-status-column
     [title]="columnTitles.TODO"
+    [columnStatus]="taskStatus.TODO"
   ></app-status-column>
   <app-status-column
     [title]="columnTitles.IN_PROGRESS"
+    [columnStatus]="taskStatus.IN_PROGRESS"
   ></app-status-column>
   <app-status-column
     [title]="columnTitles.DONE"
+    [columnStatus]="taskStatus.DONE"
   ></app-status-column>
 </div>
