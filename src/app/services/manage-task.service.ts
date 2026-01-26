@@ -32,13 +32,13 @@ export class ManageTaskService {
 
   updateTaskCategories(allTasks: TASKDATA[]): void {
     this.todoTasks = this.allTasks.filter(
-      (task) => task.status === this.TASKSTATUS.TODO
+      (task) => task.status === this.TASKSTATUS.TODO,
     );
     this.inProgressTasks = this.allTasks.filter(
-      (task) => task.status === this.TASKSTATUS.IN_PROGRESS
+      (task) => task.status === this.TASKSTATUS.IN_PROGRESS,
     );
     this.doneTasks = this.allTasks.filter(
-      (task) => task.status === this.TASKSTATUS.DONE
+      (task) => task.status === this.TASKSTATUS.DONE,
     );
     this.tasksInfoSubject$.next([]);
   }
@@ -88,14 +88,21 @@ export class ManageTaskService {
 
   getTasksByStatus(status: string): TASKDATA[] {
     switch (status) {
-      case this.columnTitles.TODO:
+      case TASK_STATUS.TODO:
         return this.todoTasks;
-      case this.columnTitles.IN_PROGRESS:
+      case TASK_STATUS.IN_PROGRESS:
         return this.inProgressTasks;
-      case this.columnTitles.DONE:
+      case TASK_STATUS.DONE:
         return this.doneTasks;
       default:
         return [];
     }
+  }
+
+  getTaskByStatusAndId(status: string, id: string): TASKDATA | undefined {
+    console.log('Fetching task with ID:', id, 'and Status:', status);
+    console.log(this.getTasksByStatus(status));
+
+    return this.getTasksByStatus(status).find((t) => t.id === id);
   }
 }
